@@ -11,10 +11,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,17 +42,18 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //image de fond
                     Image(
-                        modifier = Modifier.matchParentSize(),
+                        modifier = Modifier
+                            .matchParentSize(),
                         painter = painterResource(id = R.drawable.sand_back),
                         contentScale = ContentScale.Crop,
                         contentDescription = "Image de fond"
                     )
-                    //CardSpot(theSpot)
-                }//box
-            }//projetsurftheme
-        }//setContent
-    }//override onCreate
-}//mainactivity
+                    CardSpot(theSpot)
+                }
+            }
+        }
+    }
+}
 
 
 
