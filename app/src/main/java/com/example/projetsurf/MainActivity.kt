@@ -24,8 +24,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
            ProjetSurfTheme {
-                    Surface (modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
+                    Surface (modifier = Modifier.fillMaxSize, painter = painterResource(id = R.drawable.sand_back)(),
+                        //color = MaterialTheme.colorScheme.background
                     )
                     {
                         DemoScreen (theSpot)
@@ -36,12 +36,14 @@ class MainActivity : ComponentActivity() {
     }
 
 data class InfosSpot(val nom: String, val lieu: String)
+
 val theSpot = InfosSpot("Le lac des oiseaux", "Inde")
+
 @Composable
 fun DemoScreen (spot:InfosSpot) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image (
-            painter = painterResource(id = R.drawable.sand_back),
+            ,
             contentDescription  = "Demo background",
             contentScale = ContentScale.FillBounds,
             modifier = Modifier.matchParentSize()
