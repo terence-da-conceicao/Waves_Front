@@ -10,6 +10,10 @@
       </SelectionState>
       <SelectionState runConfigName="ProjetSurfTheme">
         <option name="selectionMode" value="DROPDOWN" />
+        <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="PreviewCardSpot">
+        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>
