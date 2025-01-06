@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+//fonction pour convertir le json en string
 fun loadSpotFromAssets(context: Context, fileName: String
 ): String? {
     val jsonString: String
@@ -61,6 +62,7 @@ fun loadSpotFromAssets(context: Context, fileName: String
     return jsonString
 }
 
+// 'fetch" le json depuis fichier local ('assets')
 fun spotList(context: Context): List<Spot> {
     return try {
         val jsonFileString = loadSpotFromAssets(context, "first.json")
@@ -78,12 +80,15 @@ fun spotList(context: Context): List<Spot> {
     }
 }
 
+//transforme la string en liste
 data class SpotResponse(
     val records: List<Spot>
 )
 
+//récupère les différents léments de la liste
 data class Spot(
-    @SerializedName("Surf Break")
+    @SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
+    si il y a un espace dans la clé*/
     val surfBreak: String,
     val Photos: String,
     val Address: String
@@ -106,7 +111,8 @@ fun OneSpotScreen () {
             val spots = spotList(context = LocalContext.current)
             spots.firstOrNull()?.let { spot ->
                 Text(text = spot.surfBreak, fontSize = 30.sp, fontWeight = FontWeight.Medium)
-                Image(painter = painterResource(id = R.drawable.test_default),
+                Image(painter = painterResource(id = R.drawable.test_default), /*pas mis le lien
+                vers l'image car nécessite une library  pour l'afficher (Coil)*/
                 contentDescription  = "Image placeholder",)
                 Text(text = spot.Address, fontSize = 30.sp, fontWeight = FontWeight.Medium)
             } ?: Text("No spots available")
