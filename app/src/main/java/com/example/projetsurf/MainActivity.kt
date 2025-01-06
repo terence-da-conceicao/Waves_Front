@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.projetsurf.ui.theme.ProjetSurfTheme
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
 
@@ -82,8 +83,9 @@ data class SpotResponse(
 )
 
 data class Spot(
-    val `Surf Break`: String,
-    val Photos: Int,
+    @SerializedName("Surf Break")
+    val surfBreak: String,
+    val Photos: String,
     val Address: String
 )
 
@@ -103,7 +105,7 @@ fun OneSpotScreen () {
         ) {
             val spots = spotList(context = LocalContext.current)
             spots.firstOrNull()?.let { spot ->
-                Text(text = spot.`Surf Break`, fontSize = 30.sp, fontWeight = FontWeight.Medium)
+                Text(text = spot.surfBreak, fontSize = 30.sp, fontWeight = FontWeight.Medium)
                 Image(painter = painterResource(id = R.drawable.test_default),
                 contentDescription  = "Image placeholder",)
                 Text(text = spot.Address, fontSize = 30.sp, fontWeight = FontWeight.Medium)
