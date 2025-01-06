@@ -1,20 +1,34 @@
 package com.example.projetsurf
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialogDefaults.containerColor
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -30,6 +44,83 @@ val theSpot = InfosSpot("Bells Beach", "Australie")
 // fragment : le spot
 //@PreviewParameter()
 
+/* la fonction qui rassemble les elements de la page entière : l'encart avec les infos du spot et l'encart avec les deux boutons */
+@Composable
+fun Spot() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column()
+        {
+            CardSpot(theSpot)
+            ShowButtons()
+        }
+    }
+}
+
+
+/*L'encart horizontal qui contient les deux boutons */
+@Composable
+fun ShowButtons() {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            /*bouton liste des spots*/
+            Button(
+                modifier = Modifier
+                    .height(80.dp)
+                    .width(140.dp),
+                shape = RoundedCornerShape(10.dp),
+                enabled = true,
+                elevation = ButtonDefaults.buttonElevation(
+                    defaultElevation = 20.dp
+                ),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF08c9c8),
+                    contentColor = Color.Black
+                ),
+                onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+            ) {
+                Text(
+                    text = "Revenir à la liste des spots de ce pays",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+
+            } /*Button */
+
+            /*bouton accueil */
+            Button(
+                modifier = Modifier
+                    .height(80.dp)
+                    .width(140.dp),
+                shape = RoundedCornerShape(10.dp),
+                enabled = true,
+                elevation = ButtonDefaults.buttonElevation(
+                    defaultElevation = 20.dp
+                ),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF08c9c8),
+                    contentColor = Color.Black
+                ),
+                onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+            ) {
+                Text(
+                    text = "Accueil",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+
+            } /*Button */
+        } /* Row */
+} /* ShowButtons */
+
+
+
+/* encart avec les infos du spot */
 @Composable
 fun CardSpot(spot: InfosSpot) {
     Surface(
@@ -50,8 +141,6 @@ fun CardSpot(spot: InfosSpot) {
                 text = spot.nom,
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Medium,
-                //verticalArrangement = Arrangement.Center,
-                // horizontalAlignment = Alignment.CenterHorizontally
             )
             Image(
                 painter = painterResource(id = R.drawable.bellsbeach),
@@ -64,12 +153,31 @@ fun CardSpot(spot: InfosSpot) {
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Medium
             )
-        }
-    }
+        }/* Column */
+    } /* Surface */
+} /*CardSpot*/
+
+
+
+
+
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewShowButtons() {
+    ShowButtons()
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewCardSpot() {
     CardSpot(theSpot)
+}
+
+
+@Preview (showBackground = true)
+@Composable
+fun PreviewSpot() {
+    Spot()
 }
