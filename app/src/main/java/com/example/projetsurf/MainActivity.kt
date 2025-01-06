@@ -5,6 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,58 +26,69 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.projetsurf.CardSpot
 import com.example.projetsurf.ui.theme.ProjetSurfTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()
         setContent {
-           ProjetSurfTheme {
-                    Surface (modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    )
-                    {
-                        DemoScreen ()
-                    }
-                }
-            }
+            ProjetSurfTheme()
         }
     }
+}
+
 
 @Composable
-fun DemoScreen () {
-        Box(modifier = Modifier.fillMaxSize()) {
-        Image (
+fun ProjetSurfTheme () {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Image(
             painter = painterResource(id = R.drawable.sand_back),
-            contentDescription  = "Demo background",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier.matchParentSize()
+            contentDescription = "Image de fond",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .matchParentSize()
         )
-        Column  (
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(text = "Spot", fontSize = 30.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(all = 20.dp))
-            Image(painter = painterResource(id = R.drawable.test_default),
-                contentDescription  = "Image placeholder",)
-            Text(text = "Lieu", fontSize = 30.sp, fontWeight = FontWeight.Medium, modifier = Modifier.padding(all = 20.dp))
-        }
-        }
+//        Row(verticalAlignment = Alignment.CenterVertically) {
+//            Column(
+//                verticalArrangement = Arrangement.Center,
+//                horizontalAlignment = Alignment.CenterHorizontally
+//            )
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ){
+                Spot()
 
+        }
     }
+}
+
+
+
+
+
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    ProjetSurfTheme {
-        DemoScreen()
-    }
+fun PreviewProjetSurfTheme() {
+    ProjetSurfTheme()
 }
+
+
+
+/*padding(16.dp)
+background(Color.Red)*/
