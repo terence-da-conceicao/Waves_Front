@@ -85,7 +85,7 @@ data class SpotResponse(
     val records: List<Spot>
 )
 
-//récupère les différents léments de la liste
+//récupère les différents éléments de la liste
 data class Spot(
     @SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
     si il y a un espace dans la clé*/
