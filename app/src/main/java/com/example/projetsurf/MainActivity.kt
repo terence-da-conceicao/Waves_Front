@@ -45,9 +45,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
+//        Log.d("test-log", "onCreate called")
         setContent {
             ProjetSurfTheme()
         }
+//        logMessage()
     }
 }
 
@@ -72,6 +74,8 @@ fun ProjetSurfTheme () {
             contentAlignment = Alignment.Center
         ){
                 DisplaySpot()
+                DisplayListSpots()
+
 
         }
     }
@@ -91,10 +95,13 @@ fun loadSpotFromAssets(context: Context, fileName: String
         exp.printStackTrace()
         return null
     }
-
     return jsonString
 }
 
+//fun logMessage() {
+//    val thtjson: String =
+//    Log.d("msg console", "message : $thtjson")
+//}
 
 
 // 'fetch" le json depuis fichier local ('assets')
@@ -106,6 +113,17 @@ fun spotList(context: Context): List<InfosSpot> {
         // Parse the wrapper object first, then get the records list
         val type = object : TypeToken<SpotResponse>() {}.type
         val response = Gson().fromJson<SpotResponse>(jsonFileString, type)
+        /*
+        val type contient un type. En effet, quand on parse avec Gson(), il y a une tendance
+        à perdre de la donnée, donc on crée un type. Ce type va être conceptualisé comme un objet,
+        et on va calquer son identité sur la classe SpotResponse.
+
+        response est une variable dont le contenu est ce qui converti depuis jsonFileString (qui est unn json/une string) grâce
+        à Gson() et qui devient un objet de type type, donc de type SpotResponse.
+        En d'autres termes, response, c'est un objet contenant une variable records, qui contient
+        une liste, qui contient des instances de la classe InfosSpot, donc des objets avec les infos
+        des spots de surf.
+        */
 
         // Return the records list, or empty list if null
         response?.records ?: emptyList()

@@ -48,10 +48,6 @@ val Address: String
 
 //val theSpot = InfosSpot("Bells Beach", "Australie")
 
-
-// fragment : le spot
-//@PreviewParameter()
-
 /* la fonction qui rassemble les elements de la page entière : l'encart avec les infos du spot et l'encart avec les deux boutons */
 @Composable
 fun DisplaySpot() {
@@ -145,6 +141,14 @@ fun CardSpot() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            /*on place dans la variable spots le contenu de la fonction spotList, qui créé
+            un objet contenant une variable records, qui contient
+            une liste, qui contient des instances de la classe InfosSpot, donc des objets avec les infos
+            des spots de surf.
+            On vérifie si le contenu de spots est vide, puis s'il ne l'et pas, on affiche
+            le premier element et on l'assigne dans la variable spot.
+            Enfin, on appele les infos de spot isolément.
+            */
             val spots = spotList(context = LocalContext.current)
             spots.firstOrNull()?.let { spot ->
                 Text(
