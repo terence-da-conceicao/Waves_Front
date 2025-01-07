@@ -1,6 +1,8 @@
 package com.example.projetsurf
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -35,6 +37,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projetsurf.CardSpot
 import com.example.projetsurf.ui.theme.ProjetSurfTheme
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
+import com.google.gson.Gson
+import java.io.IOException
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,21 +65,65 @@ fun ProjetSurfTheme () {
             modifier = Modifier
                 .matchParentSize()
         )
-//        Row(verticalAlignment = Alignment.CenterVertically) {
-//            Column(
-//                verticalArrangement = Arrangement.Center,
-//                horizontalAlignment = Alignment.CenterHorizontally
-//            )
+
         Box(
             modifier = Modifier
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ){
-                Spot()
+                DisplaySpot()
 
         }
     }
 }
+
+
+
+//fonction pour convertir le json en string
+fun loadSpotFromAssets(context: Context, fileName: String
+): String? {
+    val jsonString: String
+    try {
+        jsonString = context.assets.open(fileName).bufferedReader().use {
+            it.readText()
+        }
+    } catch (exp: IOException) {
+        exp.printStackTrace()
+        return null
+    }
+
+    return jsonString
+}
+
+
+
+// 'fetch" le json depuis fichier local ('assets')
+fun spotList(context: Context): List<InfosSpot> {
+    return try {
+        val jsonFileString = loadSpotFromAssets(context, "first.json")
+            ?: return emptyList()
+
+        // Parse the wrapper object first, then get the records list
+        val type = object : TypeToken<SpotResponse>() {}.type
+        val response = Gson().fromJson<SpotResponse>(jsonFileString, type)
+
+        // Return the records list, or empty list if null
+        response?.records ?: emptyList()
+    } catch (e: Exception) {
+        Log.e("SpotList", "Error parsing JSON", e)
+        emptyList() // Return empty list on any error
+    }
+}
+
+
+
+//transforme la string en liste
+data class SpotResponse(
+    val records: List<InfosSpot>
+)
+
+
+
 
 
 
@@ -86,8 +135,3 @@ fun ProjetSurfTheme () {
 fun PreviewProjetSurfTheme() {
     ProjetSurfTheme()
 }
-
-
-
-/*padding(16.dp)
-background(Color.Red)*/

@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,12 +34,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.gson.annotations.SerializedName
 
 
+//récupère les différents léments de la liste
+data class InfosSpot(
+@SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
+    si il y a un espace dans la clé*/
+val surfBreak: String,
+val Photos: String,
+val Address: String
+)
 
-data class InfosSpot(val nom: String, val lieu: String)
-
-val theSpot = InfosSpot("Bells Beach", "Australie")
+//val theSpot = InfosSpot("Bells Beach", "Australie")
 
 
 // fragment : le spot
@@ -46,11 +54,12 @@ val theSpot = InfosSpot("Bells Beach", "Australie")
 
 /* la fonction qui rassemble les elements de la page entière : l'encart avec les infos du spot et l'encart avec les deux boutons */
 @Composable
-fun Spot() {
+fun DisplaySpot() {
     Box(modifier = Modifier.fillMaxSize()) {
         Column()
         {
-            CardSpot(theSpot)
+//            CardSpot(theSpot)
+            CardSpot()
             ShowButtons()
         }
     }
@@ -122,7 +131,8 @@ fun ShowButtons() {
 
 /* encart avec les infos du spot */
 @Composable
-fun CardSpot(spot: InfosSpot) {
+//fun CardSpot(spot: InfosSpot)
+fun CardSpot() {
     Surface(
         modifier = Modifier
             .height(300.dp)
@@ -135,24 +145,29 @@ fun CardSpot(spot: InfosSpot) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                modifier = Modifier
-                    .padding(all = 10.dp),
-                text = spot.nom,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Medium,
-            )
-            Image(
-                painter = painterResource(id = R.drawable.bellsbeach),
-                contentDescription = "photo du lieu"
-            )
-            Text(
-                modifier = Modifier
-                    .padding(all = 10.dp),
-                text = spot.lieu,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Medium
-            )
+            val spots = spotList(context = LocalContext.current)
+            spots.firstOrNull()?.let { spot ->
+                Text(
+                    modifier = Modifier
+                        .padding(all = 10.dp),
+                    text = spot.surfBreak,
+                    //affichage nom du spot
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.bellsbeach),
+                    contentDescription = "photo du lieu"
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(all = 10.dp),
+                    text = spot.Address,
+                    //affichage lieu du spot
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Medium
+                )
+            }?: Text("No spots available")
         }/* Column */
     } /* Surface */
 } /*CardSpot*/
@@ -172,12 +187,13 @@ fun PreviewShowButtons() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewCardSpot() {
-    CardSpot(theSpot)
+//    CardSpot(theSpot)
+    CardSpot()
 }
 
 
 @Preview (showBackground = true)
 @Composable
 fun PreviewSpot() {
-    Spot()
+    DisplaySpot()
 }
