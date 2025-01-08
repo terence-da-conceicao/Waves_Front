@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.google.gson.annotations.SerializedName
 
 
-//récupère les différents léments de la liste
+//récupère les différents éléments de la liste
 data class InfosSpot(
 @SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
     si il y a un espace dans la clé*/
@@ -76,14 +76,11 @@ fun ShowButtons() {
                     .width(140.dp),
                 shape = RoundedCornerShape(10.dp),
                 enabled = true,
-                elevation = ButtonDefaults.buttonElevation(
-                    defaultElevation = 20.dp
-                ),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF08c9c8),
-                    contentColor = Color.Black
-                ),
-                onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+                    contentColor = Color.Black),
+                onClick = { }
             ) {
                 Text(
                     text = "Revenir à la liste des spots de ce pays",
@@ -198,6 +195,6 @@ fun PreviewCardSpot() {
 
 @Preview (showBackground = true)
 @Composable
-fun PreviewSpot() {
+fun PreviewDisplaySpot() {
     DisplaySpot()
 }

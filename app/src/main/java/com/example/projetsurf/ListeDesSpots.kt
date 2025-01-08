@@ -2,9 +2,11 @@ package com.example.projetsurf
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -35,12 +37,13 @@ fun DisplayListSpots(){
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            ButtonHome()
             ButtonSpot()
             ButtonSpot()
             ButtonSpot()
             ButtonSpot()
-
         }
+
     }
 }
 
@@ -54,16 +57,12 @@ fun ButtonSpot(
         shape = RoundedCornerShape(10.dp), //bords arrondis
         enabled = true, //ça le rend cliquable
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 20.dp, //aucune idée de ce que ça fait, lui donner une ombre portée? ça n'a pas marché si c'est le cas
-
-        ),
-
+        defaultElevation = 20.dp, /*aucune idée de ce que ça fait, lui donner une ombre portée? ça n'a pas marché si c'est le cas*/ ),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF08c9c8), //couleur du fond (j'ai laissé en bleu mais il faut mettre une image)
-            contentColor = Color.Black //couleur du contennu (ici le texte)
-        ),
+        containerColor = Color(0xFF08c9c8), //couleur du fond (j'ai laissé en bleu mais il faut mettre une image)
+        contentColor = Color.Black /* couleur du contennu (ici le texte) */ ),
         onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
-    ) {
+        ) {
         Text(
             text = "Nom (Surf Break)",
             fontWeight = FontWeight.Bold,
@@ -79,10 +78,34 @@ fun ButtonSpot(
             textAlign = TextAlign.Center,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
-
-    } /*Button */
-
+    }
 }
+
+
+@Composable
+fun ButtonHome() {
+    Button(
+        modifier = Modifier
+            .height(80.dp)
+            .width(140.dp),
+        shape = RoundedCornerShape(10.dp),
+        enabled = true,
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
+        onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+    ) {
+        Text(
+            text = "Accueil",
+            fontWeight = FontWeight.Bold,
+            fontSize = 13.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
+    }
+}
+
+
+
 
 
 
@@ -95,6 +118,13 @@ fun PreviewButtonSpot(){
 
 @Composable
 @Preview
+fun PreviewButtonHome(){
+    ButtonHome()
+}
+
+@Composable
+@Preview
 fun PreviewDisplayListSpots(){
   DisplayListSpots()
 }
+
