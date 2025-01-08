@@ -9,6 +9,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -31,6 +35,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ProjetSurfTheme () {
+//    var currentPage by remember { mutableStateOf<Page>(Page.ListOfSpots) }
+//
+//    Log.d("ProjetSurfTheme", "Page actuelle : $currentPage")
+//
+//    AppNavigation(currentPage = currentPage, onNavigateToList = { currentPage = it })
+
+
 
     Box(
         modifier = Modifier
@@ -100,8 +111,13 @@ data class SpotResponse(
     val records: List<InfosSpot>
 )
 
-
-
+//@Composable
+//fun AppNavigation(currentPage: Page, onNavigateToList: (Page) -> Unit) {
+//    when (currentPage) {
+//        is Page.ListOfSpots -> DisplayListSpots(onNavigateToList = onNavigateToList)
+//        is Page.ChosenSpot -> DisplaySpot(onNavigateToList = onNavigateToList)
+//    }
+//}
 
 
 
