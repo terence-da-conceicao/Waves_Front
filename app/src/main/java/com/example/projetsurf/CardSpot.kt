@@ -39,11 +39,11 @@ import com.google.gson.annotations.SerializedName
 
 //récupère les différents léments de la liste
 data class InfosSpot(
-@SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
+    @SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
     si il y a un espace dans la clé*/
-val surfBreak: String,
-val Photos: String,
-val Address: String
+    val surfBreak: String,
+    val Photos: String,
+    val Address: String
 )
 
 //val theSpot = InfosSpot("Bells Beach", "Australie")
@@ -69,62 +69,63 @@ fun DisplaySpot() {
 /*L'encart horizontal qui contient les deux boutons */
 @Composable
 fun ShowButtons() {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        /*bouton liste des spots*/
+        Button(
+            modifier = Modifier
+                .height(60.dp)
+                .width(140.dp),
+            shape = RoundedCornerShape(10.dp),
+            enabled = true,
+            elevation = ButtonDefaults.buttonElevation(
+                defaultElevation = 20.dp
+            ),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF08c9c8),
+                contentColor = Color.Black
+            ),
+            onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
         ) {
-            /*bouton liste des spots*/
-            Button(
-                modifier = Modifier
-                    .height(80.dp)
-                    .width(140.dp),
-                shape = RoundedCornerShape(10.dp),
-                enabled = true,
-                elevation = ButtonDefaults.buttonElevation(
-                    defaultElevation = 20.dp
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF08c9c8),
-                    contentColor = Color.Black
-                ),
-                onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
-            ) {
-                Text(
-                    text = "Revenir à la liste des spots de ce pays",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 13.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
+            Text(
+                text = "Liste des spots",
+//                fontFamily = Lobster,
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
 
-            } /*Button */
+        } /*Button */
 
-            /*bouton accueil */
-            Button(
-                modifier = Modifier
-                    .height(80.dp)
-                    .width(140.dp),
-                shape = RoundedCornerShape(10.dp),
-                enabled = true,
-                elevation = ButtonDefaults.buttonElevation(
-                    defaultElevation = 20.dp
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF08c9c8),
-                    contentColor = Color.Black
-                ),
-                onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
-            ) {
-                Text(
-                    text = "Accueil",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 13.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
+        /*bouton accueil */
+        Button(
+            modifier = Modifier
+                .height(60.dp)
+                .width(150.dp),
+            shape = RoundedCornerShape(10.dp),
+            enabled = true,
+            elevation = ButtonDefaults.buttonElevation(
+                defaultElevation = 20.dp
+            ),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF08c9c8),
+                contentColor = Color.Black
+            ),
+            onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+        ) {
+            Text(
+                text = "Accueil",
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
 
-            } /*Button */
-        } /* Row */
+        } /*Button */
+    } /* Row */
 } /* ShowButtons */
 
 

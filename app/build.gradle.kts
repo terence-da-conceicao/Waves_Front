@@ -41,6 +41,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.ui.text.google.fonts     )
     implementation(libs.gson) //installation library Gson pour gestion Json
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
