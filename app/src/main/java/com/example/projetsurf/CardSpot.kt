@@ -1,39 +1,30 @@
 package com.example.projetsurf
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.interaction.MutableInteractionSource
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.google.gson.annotations.SerializedName
 
 
@@ -45,6 +36,8 @@ val surfBreak: String,
 val Photos: String,
 val Address: String
 )
+
+
 
 //val theSpot = InfosSpot("Bells Beach", "Australie")
 
@@ -156,8 +149,8 @@ fun CardSpot() {
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Medium,
                 )
-                Image(
-                    painter = painterResource(id = R.drawable.bellsbeach),
+                AsyncImage(
+                    model = "https://media.istockphoto.com/id/816752606/fr/photo/carte-de-test-tv-ou-mire-g%C3%A9n%C3%A9rique.jpg?s=612x612&w=0&k=20&c=nraCmqihb_FNDhPfxFGRB4jabgrEtVJy0m6xL_UJTcM=",
                     contentDescription = "photo du lieu"
                 )
                 Text(
@@ -168,6 +161,7 @@ fun CardSpot() {
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Medium
                 )
+                Log.d("fetched url", spot.Photos) //log de l'url de l'image dans le json
             }?: Text("No spots available")
         }/* Column */
     } /* Surface */

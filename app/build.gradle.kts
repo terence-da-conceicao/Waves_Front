@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+    implementation(libs.coil.compose)
+    implementation(libs.coil3.coil.network.okhttp) //permet d'afficher des images depuis une url
     implementation(libs.gson) //installation library Gson pour gestion Json
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
