@@ -1,6 +1,7 @@
 package com.example.projetsurf
 
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,7 +45,10 @@ data class InfosSpot(
 /* la fonction qui rassemble les elements de la page entière : l'encart avec les infos du spot et l'encart avec les deux boutons */
 @Composable
 fun DisplaySpot() {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()
+
+    ) {
+
         Column()
         {
 //            CardSpot(theSpot)
@@ -63,13 +69,14 @@ fun ShowButtons() {
         /*bouton liste des spots*/
         Button(
             modifier = Modifier
-                .height(60.dp)
+                .height(80.dp)
                 .width(140.dp),
             shape = RoundedCornerShape(10.dp),
             enabled = true,
             elevation = ButtonDefaults.buttonElevation(
-                defaultElevation = 20.dp
+                defaultElevation = 15.dp
             ),
+
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF08c9c8),
                 contentColor = Color.Black
