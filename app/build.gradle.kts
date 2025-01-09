@@ -41,6 +41,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.ui.text.google.fonts     )
     implementation(libs.coil.compose)
     implementation(libs.coil3.coil.network.okhttp) //permet d'afficher des images depuis une url
     implementation(libs.gson) //installation library Gson pour gestion Json

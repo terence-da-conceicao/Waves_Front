@@ -1,21 +1,16 @@
 package com.example.projetsurf
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -42,68 +37,85 @@ fun DisplayListSpots(navController: NavController)
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ButtonHome(navController)
-            ButtonSpot(navController)
-            ButtonSpot(navController)
-            ButtonSpot(navController)
-            ButtonSpot(navController)
+            ButtonSpot(navController, image = painterResource(id = R.drawable.vague), surfBreak = "Spot 1", location = "Lieu 1")
+            ButtonSpot(navController, image = painterResource(id = R.drawable.couple_surf), surfBreak = "Spot 2", location = "Lieu 2")
+            ButtonSpot(navController, image = painterResource(id = R.drawable.plage_ecume), surfBreak = "Spot 3", location = "Lieu 3")
+            ButtonSpot(navController, image = painterResource(id = R.drawable.bellsbeach), surfBreak = "Spot 4", location = "Lieu 4")
         }
 
     }
 }
 
 @Composable
-fun ButtonSpot(navController: NavController){
-    Button(
+fun ButtonSpot(navController: NavController, image: Painter, // Image pour l'arrière-plan
+               surfBreak: String, // Texte principal
+               location: String
+){
+    Box(
+        //navController: NavController
         modifier = Modifier
             .height(80.dp)
-            .width(300.dp),
-        shape = RoundedCornerShape(10.dp), //bords arrondis
-        enabled = true, //ça le rend cliquable
-        elevation = ButtonDefaults.buttonElevation(
-        defaultElevation = 20.dp, /*aucune idée de ce que ça fait, lui donner une ombre portée? ça n'a pas marché si c'est le cas*/ ),
-        colors = ButtonDefaults.buttonColors(
-        containerColor = Color(0xFF08c9c8), //couleur du fond (j'ai laissé en bleu mais il faut mettre une image)
-        contentColor = Color.Black /* couleur du contennu (ici le texte) */ ),
-        onClick = { navController.navigate(Router.Spot.name) }
-        ) {
-        Text(
-            text = "Nom (Surf Break)",
-            fontWeight = FontWeight.Bold,
-            fontSize = 13.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            .width(300.dp)
+            .padding(bottom = 20.dp) // Espacement entre les boutons
+            .clickable { navController.navigate(Router.Spot.name)}, // Rendre le bouton cliquable
+        contentAlignment = Alignment.Center // Centre le contenu dans le bouton
+    ) {
+        // Image en arrière-plan
+        Image(
+            painter = image,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(10.dp)), // Coins arrondis
+            contentScale = ContentScale.Crop // Adapte l'image à la taille du bouton
         )
 
-        Text(
-            text = "Lieu (State/Country)",
-            fontWeight = FontWeight.Bold,
-            fontSize = 13.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
+        // Texte superposé
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = surfBreak,
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+                color = Color.White, // Couleur du texte principal
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = location,
+                fontWeight = FontWeight.Normal,
+                fontSize = 12.sp,
+                color = Color.White, // Couleur du texte secondaire
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
-
 @Composable
 fun ButtonHome(navController: NavController) {
-    Button(
+    Box(
         modifier = Modifier
             .height(80.dp)
-            .width(140.dp),
+            .width(140.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .clickable { navController.navigate(Router.ListePays.name)},
         shape = RoundedCornerShape(10.dp),
         enabled = true,
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
-        onClick = { navController.navigate(Router.ListePays.name) }
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Accueil",
-            fontWeight = FontWeight.Bold,
-            fontSize = 13.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
+        Surface(color = Color(0xFF08c9c8)) {
+            Text(
+                text = "Accueil",
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center,
+                //modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
     }
 }
 
@@ -115,15 +127,22 @@ fun ButtonHome(navController: NavController) {
 
 @Composable
 @Preview (showBackground = true)
-fun PreviewButtonSpot(){
-    ButtonSpot(navController = rememberNavController())
+fun PreviewButtonSpot() {
+    ButtonSpot(
+        navController = rememberNavController(),
+        image = painterResource(id = R.drawable.vague),
+        surfBreak = "Spot Test",
+        location = "Lieu Test"
+    )
 }
+
 
 @Composable
 @Preview (showBackground = true)
 fun PreviewButtonHome(){
     ButtonHome(navController = rememberNavController())
 }
+
 
 @Composable
 @Preview (showBackground = true)
