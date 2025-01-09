@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,13 +22,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
-
 @Composable
-fun DisplayListSpots(navController: NavController)
-    {
+fun DisplayListSpots(navController: NavController) {
     Surface(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         color = Color.Transparent
     ) {
         Column(
@@ -42,23 +38,23 @@ fun DisplayListSpots(navController: NavController)
             ButtonSpot(navController, image = painterResource(id = R.drawable.plage_ecume), surfBreak = "Spot 3", location = "Lieu 3")
             ButtonSpot(navController, image = painterResource(id = R.drawable.bellsbeach), surfBreak = "Spot 4", location = "Lieu 4")
         }
-
     }
 }
 
 @Composable
-fun ButtonSpot(navController: NavController, image: Painter, // Image pour l'arrière-plan
-               surfBreak: String, // Texte principal
-               location: String
-){
+fun ButtonSpot(
+    navController: NavController,
+    image: Painter, // Image pour l'arrière-plan
+    surfBreak: String, // Texte principal
+    location: String // Texte secondaire
+) {
     Box(
-        //navController: NavController
         modifier = Modifier
             .height(80.dp)
             .width(300.dp)
             .padding(bottom = 20.dp) // Espacement entre les boutons
-            .clickable { navController.navigate(Router.Spot.name)}, // Rendre le bouton cliquable
-        contentAlignment = Alignment.Center // Centre le contenu dans le bouton
+            .clickable { navController.navigate(Router.Spot.name) }, // Navigation au clic
+        contentAlignment = Alignment.Center // Centre le contenu
     ) {
         // Image en arrière-plan
         Image(
@@ -100,33 +96,28 @@ fun ButtonHome(navController: NavController) {
             .height(80.dp)
             .width(140.dp)
             .clip(RoundedCornerShape(10.dp))
-            .clickable { navController.navigate(Router.ListePays.name)},
-        shape = RoundedCornerShape(10.dp),
-        enabled = true,
-        elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
+            .clickable { navController.navigate(Router.ListePays.name) }, // Navigation
         contentAlignment = Alignment.Center
     ) {
-        Surface(color = Color(0xFF08c9c8)) {
+        Surface(
+            color = Color(0xFF08c9c8),
+            shape = RoundedCornerShape(10.dp)
+        ) {
             Text(
                 text = "Accueil",
                 fontWeight = FontWeight.Bold,
                 fontSize = 13.sp,
                 textAlign = TextAlign.Center,
-                //modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(10.dp)
             )
         }
     }
 }
 
-
-
-
-
-
-
 @Composable
-@Preview (showBackground = true)
+@Preview(showBackground = true)
 fun PreviewButtonSpot() {
     ButtonSpot(
         navController = rememberNavController(),
@@ -136,17 +127,14 @@ fun PreviewButtonSpot() {
     )
 }
 
-
 @Composable
-@Preview (showBackground = true)
-fun PreviewButtonHome(){
+@Preview(showBackground = true)
+fun PreviewButtonHome() {
     ButtonHome(navController = rememberNavController())
 }
 
-
 @Composable
-@Preview (showBackground = true)
-fun PreviewDisplayListSpots(){
-  DisplayListSpots(navController = rememberNavController())
+@Preview(showBackground = true)
+fun PreviewDisplayListSpots() {
+    DisplayListSpots(navController = rememberNavController())
 }
-

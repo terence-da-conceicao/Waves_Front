@@ -1,7 +1,6 @@
 package com.example.projetsurf
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,9 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,11 +31,13 @@ import com.google.gson.annotations.SerializedName
 
 
 data class InfosSpot(
-    @SerializedName("Surf Break")
-    val surfBreak: String,
-    val Photos: String,
-    val Address: String
+@SerializedName("Surf Break")
+val surfBreak: String,
+val Photos: String,
+val Address: String
 )
+
+
 
 //val theSpot = InfosSpot("Bells Beach", "Australie")
 
@@ -62,16 +61,11 @@ fun ShowButtons(navController: NavController) {
         horizontalArrangement = Arrangement.Start
     ) {
         Button(
-            modifier = Modifier
-                .height(80.dp)
-                .width(140.dp),
+            modifier = Modifier.height(80.dp).width(140.dp),
             shape = RoundedCornerShape(10.dp),
             enabled = true,
-            elevation = ButtonDefaults.buttonElevation(defaultElevation = 15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF08c9c8),
-                contentColor = Color.Black
-            ),
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
             onClick = { navController.navigate(Router.ListeSpots.name) }
         ) {
             Text(
@@ -90,10 +84,7 @@ fun ShowButtons(navController: NavController) {
             shape = RoundedCornerShape(10.dp),
             enabled = true,
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF08c9c8),
-                contentColor = Color.Black
-            ),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
             onClick = { navController.navigate(Router.ListePays.name) }
         ) {
             Text(
@@ -107,9 +98,6 @@ fun ShowButtons(navController: NavController) {
     }
 }
 
-} /*Button */
-} /* Row */
-} /* ShowButtons */
 
 
 
@@ -145,10 +133,14 @@ fun CardSpot(navController: NavController) {
                     fontWeight = FontWeight.Medium
                 )
                 Log.d("fetched url", spot.Photos) //log de l'url de l'image dans le json
-            } ?: Text("No spots available")
-        }/* Column */
-    } /* Surface */
-} /*CardSpot*/
+            }?: Text("No spots available")
+        }
+    }
+}
+
+
+
+
 
 
 @Preview(showBackground = true)
@@ -167,7 +159,7 @@ fun PreviewCardSpot() {
 }
 
 
-@Preview(showBackground = true)
+@Preview (showBackground = true)
 @Composable
 fun PreviewDisplaySpot() {
     val navController = rememberNavController()
