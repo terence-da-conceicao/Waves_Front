@@ -34,7 +34,8 @@ fun DisplayListSpots(navController: NavController)
     {
     Surface(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        color = Color.Transparent
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -113,19 +114,19 @@ fun ButtonHome(navController: NavController) {
 
 
 @Composable
-@Preview
+@Preview (showBackground = true)
 fun PreviewButtonSpot(){
     ButtonSpot(navController = rememberNavController())
 }
 
 @Composable
-@Preview
+@Preview (showBackground = true)
 fun PreviewButtonHome(){
     ButtonHome(navController = rememberNavController())
 }
 
 @Composable
-@Preview
+@Preview (showBackground = true)
 fun PreviewDisplayListSpots(){
   DisplayListSpots(navController = rememberNavController())
 }
