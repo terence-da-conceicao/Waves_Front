@@ -25,10 +25,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun DisplayListSpots(){
+fun DisplayListSpots(navController: NavController)
+    {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -37,19 +40,18 @@ fun DisplayListSpots(){
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ButtonHome()
-            ButtonSpot()
-            ButtonSpot()
-            ButtonSpot()
-            ButtonSpot()
+            ButtonHome(navController)
+            ButtonSpot(navController)
+            ButtonSpot(navController)
+            ButtonSpot(navController)
+            ButtonSpot(navController)
         }
 
     }
 }
 
 @Composable
-fun ButtonSpot(
-){
+fun ButtonSpot(navController: NavController){
     Button(
         modifier = Modifier
             .height(80.dp)
@@ -61,7 +63,7 @@ fun ButtonSpot(
         colors = ButtonDefaults.buttonColors(
         containerColor = Color(0xFF08c9c8), //couleur du fond (j'ai laissé en bleu mais il faut mettre une image)
         contentColor = Color.Black /* couleur du contennu (ici le texte) */ ),
-        onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+        onClick = { navController.navigate(Router.Spot.name) }
         ) {
         Text(
             text = "Nom (Surf Break)",
@@ -83,7 +85,7 @@ fun ButtonSpot(
 
 
 @Composable
-fun ButtonHome() {
+fun ButtonHome(navController: NavController) {
     Button(
         modifier = Modifier
             .height(80.dp)
@@ -92,7 +94,7 @@ fun ButtonHome() {
         enabled = true,
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
-        onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+        onClick = { navController.navigate(Router.ListePays.name) }
     ) {
         Text(
             text = "Accueil",
@@ -113,18 +115,18 @@ fun ButtonHome() {
 @Composable
 @Preview
 fun PreviewButtonSpot(){
-    ButtonSpot()
+    ButtonSpot(navController = rememberNavController())
 }
 
 @Composable
 @Preview
 fun PreviewButtonHome(){
-    ButtonHome()
+    ButtonHome(navController = rememberNavController())
 }
 
 @Composable
 @Preview
 fun PreviewDisplayListSpots(){
-  DisplayListSpots()
+  DisplayListSpots(navController = rememberNavController())
 }
 

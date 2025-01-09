@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,6 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import java.io.IOException
@@ -25,23 +30,37 @@ import java.io.IOException
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
         setContent {
+            //Navigation()
             ProjetSurfTheme()
         }
     }
 }
 
+enum class Router() {
+    ListePays,
+    ListeSpots,
+    Spot
+}
 
 @Composable
 fun ProjetSurfTheme () {
-//    var currentPage by remember { mutableStateOf<Page>(Page.ListOfSpots) }
-//
-//    Log.d("ProjetSurfTheme", "Page actuelle : $currentPage")
-//
-//    AppNavigation(currentPage = currentPage, onNavigateToList = { currentPage = it })
-
-
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = Router.ListePays.name,
+        modifier = Modifier.padding(20.dp)
+    ) {
+        composable(route = Router.ListePays.name) {
+            DisplayListStatesCountries(navController)
+        }
+        composable(route = Router.ListeSpots.name) {
+            DisplayListSpots(navController)
+        }
+        composable(route = Router.Spot.name) {
+            DisplaySpot(navController)
+        }
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +78,7 @@ fun ProjetSurfTheme () {
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ){
-                DisplaySpot()
+            DisplayListStatesCountries(navController)
 
         }
     }
@@ -110,13 +129,6 @@ data class SpotResponse(
     val records: List<InfosSpot>
 )
 
-//@Composable
-//fun AppNavigation(currentPage: Page, onNavigateToList: (Page) -> Unit) {
-//    when (currentPage) {
-//        is Page.ListOfSpots -> DisplayListSpots(onNavigateToList = onNavigateToList)
-//        is Page.ChosenSpot -> DisplaySpot(onNavigateToList = onNavigateToList)
-//    }
-//}
 
 
 

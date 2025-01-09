@@ -24,14 +24,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
 import com.google.gson.annotations.SerializedName
 
 
-//récupère les différents éléments de la liste
 data class InfosSpot(
-@SerializedName("Surf Break") /*à utiliser pour modifier le nom du champs du json (par exemple
-    si il y a un espace dans la clé*/
+@SerializedName("Surf Break")
 val surfBreak: String,
 val Photos: String,
 val Address: String
@@ -41,15 +41,13 @@ val Address: String
 
 //val theSpot = InfosSpot("Bells Beach", "Australie")
 
-/* la fonction qui rassemble les elements de la page entière : l'encart avec les infos du spot et l'encart avec les deux boutons */
 @Composable
-fun DisplaySpot() {
+fun DisplaySpot(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column()
         {
-//            CardSpot(theSpot)
-            CardSpot()
-            ShowButtons()
+            CardSpot(navController)
+            ShowButtons(navController)
         }
     }
 }
@@ -57,73 +55,54 @@ fun DisplaySpot() {
 
 /*L'encart horizontal qui contient les deux boutons */
 @Composable
-fun ShowButtons() {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+fun ShowButtons(navController: NavController) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Start
+    ) {
+        Button(
+            modifier = Modifier.height(80.dp).width(140.dp),
+            shape = RoundedCornerShape(10.dp),
+            enabled = true,
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
+            onClick = { navController.navigate(Router.ListeSpots.name) }
         ) {
-            /*bouton liste des spots*/
-            Button(
-                modifier = Modifier
-                    .height(80.dp)
-                    .width(140.dp),
-                shape = RoundedCornerShape(10.dp),
-                enabled = true,
-                elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF08c9c8),
-                    contentColor = Color.Black),
-                onClick = { }
-            ) {
-                Text(
-                    text = "Revenir à la liste des spots de ce pays",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 13.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
+            Text(
+                text = "Revenir à la liste des spots de ce pays",
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
 
-            } /*Button */
-
-            /*bouton accueil */
-            Button(
-                modifier = Modifier
-                    .height(80.dp)
-                    .width(140.dp),
-                shape = RoundedCornerShape(10.dp),
-                enabled = true,
-                elevation = ButtonDefaults.buttonElevation(
-                    defaultElevation = 20.dp
-                ),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF08c9c8),
-                    contentColor = Color.Black
-                ),
-                onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
-            ) {
-                Text(
-                    text = "Accueil",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 13.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
-
-            } /*Button */
-        } /* Row */
-} /* ShowButtons */
+        Button(
+            modifier = Modifier.height(80.dp).width(140.dp),
+            shape = RoundedCornerShape(10.dp),
+            enabled = true,
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
+            onClick = { navController.navigate(Router.ListePays.name) }
+        ) {
+            Text(
+                text = "Accueil",
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+}
 
 
 
-/* encart avec les infos du spot */
+
 @Composable
-//fun CardSpot(spot: InfosSpot)
-fun CardSpot() {
+fun CardSpot(navController: NavController) {
     Surface(
-        modifier = Modifier
-            .height(300.dp)
-            .width(300.dp),
-        // .padding(20.dp),
+        modifier = Modifier.height(300.dp).width(300.dp),
         color = Color(0xFFA1E2EB),
         shape = RoundedCornerShape(20.dp)
     ) {
@@ -131,21 +110,11 @@ fun CardSpot() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            /*on place dans la variable spots le contenu de la fonction spotList, qui créé
-            un objet contenant une variable records, qui contient
-            une liste, qui contient des instances de la classe InfosSpot, donc des objets avec les infos
-            des spots de surf.
-            On vérifie si le contenu de spots est vide, puis s'il ne l'et pas, on affiche
-            le premier element et on l'assigne dans la variable spot.
-            Enfin, on appele les infos de spot isolément.
-            */
             val spots = spotList(context = LocalContext.current)
             spots.firstOrNull()?.let { spot ->
                 Text(
-                    modifier = Modifier
-                        .padding(all = 10.dp),
+                    modifier = Modifier.padding(all = 10.dp),
                     text = spot.surfBreak,
-                    //affichage nom du spot
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Medium,
                 )
@@ -154,18 +123,16 @@ fun CardSpot() {
                     contentDescription = "photo du lieu"
                 )
                 Text(
-                    modifier = Modifier
-                        .padding(all = 10.dp),
+                    modifier = Modifier.padding(all = 10.dp),
                     text = spot.Address,
-                    //affichage lieu du spot
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Medium
                 )
                 Log.d("fetched url", spot.Photos) //log de l'url de l'image dans le json
             }?: Text("No spots available")
-        }/* Column */
-    } /* Surface */
-} /*CardSpot*/
+        }
+    }
+}
 
 
 
@@ -175,20 +142,22 @@ fun CardSpot() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewShowButtons() {
-    ShowButtons()
+    val navController = rememberNavController()
+    ShowButtons(navController = rememberNavController())
 }
 
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewCardSpot() {
-//    CardSpot(theSpot)
-    CardSpot()
+    val navController = rememberNavController()
+    CardSpot(navController = rememberNavController())
 }
 
 
 @Preview (showBackground = true)
 @Composable
 fun PreviewDisplaySpot() {
-    DisplaySpot()
+    val navController = rememberNavController()
+    DisplaySpot(navController = rememberNavController())
 }

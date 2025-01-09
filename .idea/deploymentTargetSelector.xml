@@ -16,9 +16,6 @@
       <SelectionState runConfigName="PreviewButtonSpot">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="PreviewDisplaySpots">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="PreviewDisplayListStatesCountries">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>

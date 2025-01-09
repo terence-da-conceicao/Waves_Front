@@ -19,10 +19,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun DisplayListStatesCountries(){
+fun DisplayListStatesCountries(navController: NavController) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -31,10 +33,10 @@ fun DisplayListStatesCountries(){
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            ButtonStateCountry()
-            ButtonStateCountry()
-            ButtonStateCountry()
-            ButtonStateCountry()
+            ButtonStateCountry(navController)
+            ButtonStateCountry(navController)
+            ButtonStateCountry(navController)
+            ButtonStateCountry(navController)
 
 
 
@@ -43,20 +45,14 @@ fun DisplayListStatesCountries(){
 }
 
 @Composable
-fun ButtonStateCountry(
-){
+fun ButtonStateCountry(navController: NavController){
     Button(
-        modifier = Modifier
-            .height(80.dp)
-            .width(300.dp),
-        shape = RoundedCornerShape(10.dp), //bords arrondis
-        enabled = true, //ça le rend cliquable
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 20.dp, /*aucune idée de ce que ça fait, lui donner une ombre portée? ça n'a pas marché si c'est le cas*/ ),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF08c9c8), //couleur du fond (j'ai laissé en bleu mais il faut mettre une image)
-            contentColor = Color.Black /* couleur du contennu (ici le texte) */ ),
-        onClick = { /* ECRIRE CE QUE FAIT LE BOUTON viewModel.fonction*/ }
+        modifier = Modifier.height(80.dp).width(300.dp),
+        shape = RoundedCornerShape(10.dp),
+        enabled = true,
+        elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8)),
+        onClick = { navController.navigate(Router.ListeSpots.name) }
     ) {
         Text(
             text = "Pays",
@@ -65,9 +61,7 @@ fun ButtonStateCountry(
             textAlign = TextAlign.Center,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
-
-    } /*Button */
-
+    }
 }
 
 
@@ -76,11 +70,13 @@ fun ButtonStateCountry(
 @Composable
 @Preview
 fun PreviewButtonStateCountry(){
-    ButtonStateCountry()
+    val navController = rememberNavController()
+    ButtonStateCountry(navController)
 }
 
 @Composable
 @Preview
 fun PreviewDisplayListStatesCountries() {
-    DisplayListStatesCountries()
+    val navController = rememberNavController()
+    DisplayListStatesCountries(navController)
 }
