@@ -113,8 +113,6 @@ data class SpotResponse(
 
 
 
-
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewProjetSurfApp() {

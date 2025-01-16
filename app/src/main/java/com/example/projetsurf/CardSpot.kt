@@ -61,9 +61,10 @@ fun ShowButtons(navController: NavController) {
         horizontalArrangement = Arrangement.Start
     ) {
         Button(
-            modifier = Modifier.height(80.dp).width(140.dp),
+            modifier = Modifier.height(60.dp).width(150.dp).padding(5.dp),
             shape = RoundedCornerShape(10.dp),
             enabled = true,
+
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF08c9c8), contentColor = Color.Black),
             onClick = { navController.navigate(Router.ListeSpots.name) }
@@ -80,7 +81,8 @@ fun ShowButtons(navController: NavController) {
         Button(
             modifier = Modifier
                 .height(60.dp)
-                .width(150.dp),
+                .width(150.dp)
+                .padding(5.dp),
             shape = RoundedCornerShape(10.dp),
             enabled = true,
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 20.dp),

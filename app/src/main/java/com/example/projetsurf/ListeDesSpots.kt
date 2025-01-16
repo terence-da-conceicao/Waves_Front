@@ -50,9 +50,9 @@ fun ButtonSpot(
 ) {
     Box(
         modifier = Modifier
-            .height(80.dp)
+            .height(180.dp)
             .width(300.dp)
-            .padding(bottom = 20.dp) // Espacement entre les boutons
+            .padding(bottom = 30.dp) // Espacement entre les boutons
             .clickable { navController.navigate(Router.Spot.name) }, // Navigation au clic
         contentAlignment = Alignment.Center // Centre le contenu
     ) {
@@ -93,8 +93,9 @@ fun ButtonSpot(
 fun ButtonHome(navController: NavController) {
     Box(
         modifier = Modifier
-            .height(80.dp)
-            .width(140.dp)
+            .height(60.dp)
+            .width(150.dp)
+            .padding(5.dp)
             .clip(RoundedCornerShape(10.dp))
             .clickable { navController.navigate(Router.ListePays.name) }, // Navigation
         contentAlignment = Alignment.Center
@@ -106,7 +107,7 @@ fun ButtonHome(navController: NavController) {
             Text(
                 text = "Accueil",
                 fontWeight = FontWeight.Bold,
-                fontSize = 13.sp,
+                fontSize = 15.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxSize()
