@@ -1,10 +1,10 @@
 Waves est un projet d'application mobile de recherche de spots de surf. Le back est en Go (https://github.com/terence-da-conceicao/Waves_Back) et le front en Kotlin.
 
 ## Installation
-Installez l'IDE Android Studio sur https://developer.android.com/studio
-Clonez ce repo
-Dans Android Studio, cliquez sur "Gradle" si besoin, puis sur Run.
-La partie front de Waves s'affiche dans l'émulateur Android.
+- Installez l'IDE Android Studio sur https://developer.android.com/studio
+- Clonez ce repo
+- Dans Android Studio, cliquez sur "Gradle" si besoin, puis sur Run.
+- La partie front de Waves s'affiche dans l'émulateur Android.
 
 ## Fonctionnalités
 La navigation est implémentée, et nous pouvons naviger d'une page à l'autre. La page d'accueil présente une liste de pays , sur lesquels on peut cliquer. Chaque pays présente une liste de spots. Cliquez sur le spot et vous avez accès à des informations et une photo sur ce spot.
@@ -15,6 +15,6 @@ Le projet est inachevé car nous n'avons pas eu le temps de relier notre base de
 
 
 ## Crédits
-Térence Da Conceiçao
-Paul Vaucher
-Célia Lachenal
+- Térence Da Conceiçao
+- Paul Vaucher
+- Célia Lachenal
