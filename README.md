@@ -1,4 +1,4 @@
-Waves est un projet d'application mobile de recherche de spots de surf. Le back est en Go (https://github.com/terence-da-conceicao/Waves_Back) et le front en Kotlin.
+Waves est un projet d'application mobile de recherche de spots de surf. Le back est en Go et le front en Kotlin. Vous êtes sur la partie front.
 
 ## Installation
 - Installez l'IDE Android Studio sur https://developer.android.com/studio
